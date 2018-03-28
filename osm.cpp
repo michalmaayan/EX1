@@ -1,6 +1,8 @@
 #include <iostream>
 #include "osm.h"
 #include <sys/time.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 
 #define SEC_TO_MICRO 1000000

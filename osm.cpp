@@ -34,13 +34,21 @@ double osm_function_time(unsigned int iterations){
 
     for (unsigned int i=0;  i<iterations ; i+=5) {
         michalIsTheQueen();
+        michalIsTheQueen();
+        michalIsTheQueen();
+        michalIsTheQueen();
+        michalIsTheQueen();
     }
     if (gettimeofday(&tv, NULL) == -1) {
         return -1;
     }
     curtimesec = tv.tv_sec - curtimesec;
     curtimemicro = tv.tv_usec - curtimemicro;
-    return (curtimesec * SEC_TO_MICRO + curtimemicro) * MICRO_TO_NANO / iterations;
+    long to_micro = curtimesec * SEC_TO_MICRO;
+    long to_nano = (to_micro + curtimemicro) * MICRO_TO_NANO;
+    double res = (to_nano / (double)iterations)*5;
+    return res;
+    //return (double)((curtimesec * SEC_TO_MICRO + curtimemicro) * MICRO_TO_NANO / iterations);
 }
 
 double osm_syscall_time(unsigned int iterations){
@@ -57,13 +65,22 @@ double osm_syscall_time(unsigned int iterations){
 
     for (unsigned int i=0;  i<iterations ; i+=5) {
         OSM_NULLSYSCALL ;
+        OSM_NULLSYSCALL ;
+        OSM_NULLSYSCALL ;
+        OSM_NULLSYSCALL ;
+        OSM_NULLSYSCALL ;
+
     }
     if (gettimeofday(&tv, NULL) == -1) {
         return -1;
     }
     curtimesec = tv.tv_sec - curtimesec;
     curtimemicro = tv.tv_usec - curtimemicro;
-    return (curtimesec * SEC_TO_MICRO + curtimemicro) * MICRO_TO_NANO / iterations;
+    long to_micro = curtimesec * SEC_TO_MICRO;
+    long to_nano = (to_micro + curtimemicro) * MICRO_TO_NANO;
+    double res = (to_nano / (double)iterations)*5;
+    return res;
+    //return (double)((curtimesec * SEC_TO_MICRO + curtimemicro) * MICRO_TO_NANO / iterations);
 }
 
 double osm_operation_time(unsigned int iterations){
@@ -78,7 +95,8 @@ double osm_operation_time(unsigned int iterations){
     curtimesec = tv.tv_sec;
     curtimemicro = tv.tv_usec;
 
-    int num = 0;
+    int num;
+    // in case number of iteration is lower then 5 we will still run the command 5 times.
     for (unsigned int i=0;  i<iterations ; i+=5) {
         num = 1+0;
         num = 1+0;
@@ -93,13 +111,13 @@ double osm_operation_time(unsigned int iterations){
     if (gettimeofday(&tv, NULL) == -1) {
         return -1;
     }
-    printf("yaron: %ld,%ld\n", tv.tv_usec,curtimemicro);
+//    printf("yaron: %ld,%ld\n", tv.tv_usec,curtimemicro);
     curtimesec = tv.tv_sec - curtimesec;
     curtimemicro = tv.tv_usec - curtimemicro;
     long to_micro = curtimesec * SEC_TO_MICRO;
     long to_nano = (to_micro + curtimemicro) * MICRO_TO_NANO;
     double res = (to_nano / (double)iterations)*5;
-    printf("to_mic: %lu, to_nano: %lu, res: %f\n", to_micro, to_nano, res);
+//    printf("to_mic: %lu, to_nano: %lu, res: %f\n", to_micro, to_nano, res);
     return res;
 
 }
@@ -113,7 +131,9 @@ int main(int args, char* argv[]) {
 //    printf("op: %lf\n",temo );
 //    printf("func: %lf\n", osm_function_time(number));
 //    printf("sys: %lf\n", osm_syscall_time(number));
-    std::cout << osm_operation_time(number);
+    std::cout << "op\n"<<osm_operation_time(number)<<"\n";
+    std::cout << "func\n"<<osm_function_time(number)<<"\n";
+    std::cout << "sys\n"<<osm_syscall_time(number)<<"\n";
 
     return 0;
 }

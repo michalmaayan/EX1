@@ -96,19 +96,19 @@ double osm_operation_time(unsigned int iterations){
      return -1;
     }
 
-    int num;
+    int num=0;
     // in case number of iteration is lower then 5 we will still run the command 5 times.
     for (unsigned int i=0;  i<iterations ; i+=LOOP_ITER) {
-        num = 1+0;
-        num = 1+0;
-        num = 1+0;
-        num = 1+0;
-        num = 1+0;
-        num = 1+0;
-        num = 1+0;
-        num = 1+0;
-        num = 1+0;
-        num = 1+0;
+        num = num+num;
+        num = num+num;
+        num = num+num;
+        num = num+num;
+        num = num+num;
+        num = num+num;
+        num = num+num;
+        num = num+num;
+        num = num+num;
+        num = num+num;
     }
 
     // for the warning part in the makefile

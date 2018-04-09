@@ -1,0 +1,23 @@
+kawabanga, michal.maayan
+Yaron Scherf (305758211), Michal Maayan (203348776)
+EX: 1
+
+FILES:
+1. README -- this README file
+2. osm.cpp -- our code for the second part of the exercise
+
+
+REMARKS:
+Task 1:
+After we ran the program using strace, we were expected to insert a single
+argument. The program creates two directories in our file system, the first one
+named "Welcome", and the second one (inside "Welcome" directory) named "To".
+Inside the "To" directory the program creates a new file called "OS2018" and
+writes the following string inside: "michal.maayan\nIf you haven't read the
+course guidelines yet --- do it right now!\nhello" ("hello" was the argument
+we have inserted to the program at the beginning).
+Now this file is going to be deleted (using "unlink" command), and the two
+directories are also going to be deleted (using "rmdir" command).
+
+Task 2:
+The runtime results comparisons are in the "Capture.PNG" file.
